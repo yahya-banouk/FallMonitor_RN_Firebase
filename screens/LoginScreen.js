@@ -1,19 +1,29 @@
 import { View, Text,  StyleSheet,KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
+import { getDatabase, ref, set } from "firebase/database";
+
+
+ 
 
 const LoginScreen = () => {
+  const [username,setName] = useState('');
+  const [password,setPassword] = useState('');
+  function create()
+  {
+     
+  }
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior= "padding" >
         <View style={styles.inputContainer}>
         <TextInput placeholder='Email'
-            //value={}
-            //onChangeText={text => }
+            value={username}
+            onChangeText={(username) =>{setName(username)} }
             style = {styles.input}/>
-          <TextInput placeholder='Email'
-            //value={}
-            //onChangeText={text => }
+          <TextInput placeholder='password'
+            value={password}
+            onChangeText={(password) => {setPassword(password)} }
             style = {styles.input}
             secureTextEntry/>
 
@@ -62,7 +72,12 @@ const styles = StyleSheet.create(
     },
     input:
     {
-      width: '80%'
+      width: '90%',
+      fontSize: 18,
+      padding: 12,
+      borderColor: 'gray',
+      borderWidth: 0.3
+
 
     },
     buttonContainer:
@@ -71,14 +86,17 @@ const styles = StyleSheet.create(
     },
     button:
     {
+      fontSize: 18
 
     },
     buttonOutline :
     {
+      fontSize: 18
 
     },
     buttonOutlineText :
     {
+      fontSize: 18
 
     },
     buttonText:
