@@ -1,7 +1,7 @@
 import { View, Text,  StyleSheet,KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { getDatabase, ref, set } from "firebase/database";
-
+import {db } from '../firebaseConfig/config'
 
  
 
@@ -10,6 +10,16 @@ const LoginScreen = () => {
   const [password,setPassword] = useState('');
   function create()
   {
+    set(ref(db, 'users/' + password), {
+      username: username,
+      password: password
+    }).then(()=>{
+      alert('data saved');
+    })
+    .catch((error)=>
+    {
+      alert(error);
+    });
      
   }
   return (
@@ -31,9 +41,7 @@ const LoginScreen = () => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-          onPress={()=>{
-
-          }}
+          onPress={create}
           style={styles.button}
           >
             <Text style={styles.button}>Login</Text>
@@ -41,9 +49,7 @@ const LoginScreen = () => {
 
           </TouchableOpacity>
           <TouchableOpacity
-          onPress={()=>{
-
-          }}
+          onPress={create}
           style={[styles.buttonText, styles.buttonOutline]}
           >
             <Text style={styles.buttonOutlineText}>Regiter</Text>
