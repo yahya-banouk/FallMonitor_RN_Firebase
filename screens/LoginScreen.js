@@ -9,14 +9,26 @@ import {db } from '../firebaseConfig/config'
 import CustomBox from "react-native-customized-box";
  
 
-const LoginScreen = () => {
-  const [username,setName] = useState('');
-  const [password,setPassword] = useState('');
+const LoginScreen = ({navigation}) => {
+  const [UserId,setUserId] = useState('');
+  const [FirstName,setFirstName] = useState('');
+  const [LastName,setLastName] = useState('');
+  const [Email,setEmail] = useState('');
+  const [Password,setPassword] = useState('');
+  const [PhoneNumber,setPhoneNumber] = useState('');
+  
+  
   function create()
   {
-    set(ref(db, 'users/' + password), {
-      username: username,
-      password: password
+    set(ref(db, 'users/' + PhoneNumber), {
+      UserId: UserId,
+      FirstName: FirstName,
+      LastName:LastName,
+      Email:Email,
+      Password:Password,
+      PhoneNumber:PhoneNumber,
+      
+
     }).then(()=>{
       alert('data saved');
     })
@@ -24,6 +36,7 @@ const LoginScreen = () => {
     {
       alert(error);
     });
+    navigation.navigate("Home");
      
   }
  
@@ -70,17 +83,12 @@ const LoginScreen = () => {
       <StatusBar barStyle="light-content" />
       <ScrollView style={{ paddingTop: 20 }}>
         <View style={styles.container}>
-          <Image
-            style={styles.myLogo}
-            source={{
-              uri: "https://raw.githubusercontent.com/hirishu10/my-assets/main/top_log.png",
-            }}
-          />
-          <Text style={styles.header}>Create Account for Free!</Text>
+          
+          <Text style={styles.header}>Create Account to take care!</Text>
           <Image
             style={styles.registerImage}
             source={{
-              uri: "https://raw.githubusercontent.com/hirishu10/my-assets/main/register.png",
+              uri: "https://user-images.githubusercontent.com/11225821/40580715-f79faf5a-60f0-11e8-88b5-da99813517cc.png",
             }}
           />
          
@@ -89,7 +97,7 @@ const LoginScreen = () => {
             placeholder={"UserId"}
             boxColor={"silver"}
             focusColor={"#e07964"}
-            boxStyle={{ borderRadius: 40, borderWidth: 2 }}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
             inputStyle={{
               fontWeight: "bold",
               color: "grey",
@@ -106,6 +114,9 @@ const LoginScreen = () => {
             requiredConfig={{
               text: "*You don't need to provide user Id",
             }}
+            onChangeText={(value) => {
+              setUserId(value);
+            }}
             
           />
           {/* First Name */}
@@ -113,7 +124,7 @@ const LoginScreen = () => {
             placeholder={"First Name"}
             boxColor={"silver"}
             focusColor={"#e07964"}
-            boxStyle={{ borderRadius: 40, borderWidth: 2 }}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
             inputStyle={{
               fontWeight: "bold",
               color: "#30302e",
@@ -131,8 +142,6 @@ const LoginScreen = () => {
             
             onChangeText={(value) => {
               setFirstName(value);
-              setError(false);
-              setFirstError("");
             }}
           />
           {/* Last Name */}
@@ -140,7 +149,7 @@ const LoginScreen = () => {
             placeholder={"Last Name"}
             boxColor={"silver"}
             focusColor={"#e07964"}
-            boxStyle={{ borderRadius: 40, borderWidth: 2 }}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
             inputStyle={{
               fontWeight: "bold",
               color: "#30302e",
@@ -157,8 +166,6 @@ const LoginScreen = () => {
            
             onChangeText={(value) => {
               setLastName(value);
-              setError(false);
-              setLastError("");
             }}
           />
           {/* Email Id */}
@@ -167,7 +174,7 @@ const LoginScreen = () => {
             boxColor={"silver"}
             focusColor={"#e07964"}
             type={"email"}
-            boxStyle={{ borderRadius: 40, borderWidth: 2 }}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
             inputStyle={{
               fontWeight: "bold",
               color: "#30302e",
@@ -183,9 +190,8 @@ const LoginScreen = () => {
             }}
             
             onChangeText={(value) => {
-              setEmailId(value);
-              setError(false);
-              setEmailError("");
+              setEmail(value);
+              
             }}
           />
           {/* Password */}
@@ -193,7 +199,7 @@ const LoginScreen = () => {
             placeholder={"Password"}
             boxColor={"silver"}
             focusColor={"#e07964"}
-            boxStyle={{ borderRadius: 40, borderWidth: 2 }}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
             inputStyle={{
               fontWeight: "bold",
               color: "#30302e",
@@ -211,7 +217,7 @@ const LoginScreen = () => {
             toggle={true}
             
             onChangeText={(value) => {
-              
+              setPassword(value);
             }}
           />
           <CustomBox
@@ -219,7 +225,7 @@ const LoginScreen = () => {
             boxColor={"silver"}
             focusColor={"#e07964"}
             type={"phone number"}
-            boxStyle={{ borderRadius: 40, borderWidth: 2 }}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
             inputStyle={{
               fontWeight: "bold",
               color: "#30302e",
@@ -235,15 +241,15 @@ const LoginScreen = () => {
             }}
             
             onChangeText={(value) => {
-              setEmailId(value);
-              setError(false);
-              setEmailError("");
+              setPhoneNumber(value);
+              
             }}
           />
           {/* Login Button */}
           <TouchableOpacity
             style={styles.registerbtn}
-            //onPress={}
+            
+            onPress={create}
           >
             <Text style={styles.registerBtnText}>Submit</Text>
             {/*loading && loading ? (
@@ -264,7 +270,7 @@ const LoginScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    marginTop: 5,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
@@ -296,7 +302,7 @@ const styles = StyleSheet.create({
   registerImage: {
     marginTop: 20,
     width: 200,
-    height: 200,
+    height: 180,
   },
   myLogo: {
     width: 100,

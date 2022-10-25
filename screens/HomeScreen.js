@@ -1,12 +1,34 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState, componentDidMount, Component} from 'react'
 
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
-  )
+class HomeScreen extends Component{
+  
+  constructor()
+  {
+    super();
+    this.state =
+    {
+      sensoValue : 0
+    };
+  }
+  
+  componentDidMount()
+  {
+    
+    setInterval(()=>{this.setState({sensoValue : (Math.random() * (67 - 60) + 60).toFixed(5)}) ;},1000)
+
+  }
+
+
+  render()
+  {
+      return (
+      <View>
+        <Text>{this.state.sensoValue}</Text>
+      </View>
+      )
+  }
+ 
 }
 
 export default HomeScreen
