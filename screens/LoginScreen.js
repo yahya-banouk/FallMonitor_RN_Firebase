@@ -16,6 +16,8 @@ const LoginScreen = ({navigation}) => {
   const [Email,setEmail] = useState('');
   const [Password,setPassword] = useState('');
   const [PhoneNumber,setPhoneNumber] = useState('');
+  const [BoxId,setBoxId] = useState('');
+  
   
   
   function create()
@@ -27,6 +29,7 @@ const LoginScreen = ({navigation}) => {
       Email:Email,
       Password:Password,
       PhoneNumber:PhoneNumber,
+      BoxId: BoxId,
       
 
     }).then(()=>{
@@ -234,6 +237,31 @@ const LoginScreen = ({navigation}) => {
             }}
             labelConfig={{
               text: "Phone number",
+              style: {
+                color: "#0e0e21",
+                fontWeight: "bold",
+              },
+            }}
+            
+            onChangeText={(value) => {
+              setPhoneNumber(value);
+              
+            }}
+          />
+          <CustomBox
+            placeholder={"BoxId"}
+            boxColor={"silver"}
+            focusColor={"#e07964"}
+            type={"phone number"}
+            boxStyle={{ borderRadius: 40, borderWidth: 3 }}
+            inputStyle={{
+              fontWeight: "bold",
+              color: "#30302e",
+              paddingLeft: 20,
+              borderRadius: 40,
+            }}
+            labelConfig={{
+              text: "BoxId",
               style: {
                 color: "#0e0e21",
                 fontWeight: "bold",

@@ -23,8 +23,15 @@ class HomeScreen extends Component{
   render()
   {
       return (
-      <View>
-        <Text>{this.state.sensoValue}</Text>
+      <View
+      style={styles.container}
+      >
+        <Text 
+          style={styles.text}
+        > flame sensor</Text>
+        <Text 
+          style={styles.text}
+        > {this.state.sensoValue}</Text>
       </View>
       )
   }
@@ -33,4 +40,17 @@ class HomeScreen extends Component{
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 5,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: 
+  {
+    fontSize:40
+
+  }
+
+})
